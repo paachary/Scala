@@ -81,3 +81,14 @@ def processFilenPrint(args : Array[String]) = {
     else
         Console.err.println("Please enter filename")
 }
+
+
+import ChecksumAccumulator.calculate
+object Summer {
+
+    def main(args: Array[String]) = {
+        for (arg <- args)
+            println(arg + ": " + calculate(arg))
+    }
+}
+
