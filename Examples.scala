@@ -92,3 +92,20 @@ object Summer {
     }
 }
 
+1 + 2 ==> 1.+(2)
+
+1.+(2L) ==> 1+2L
+
+val s="Prashant"
+s indexOf "A"
+s. indexOf ("A")
+
+s indexOf ("A",4)
+
+-2.0
+(2.0).unary_-
+
+import scala.language.postfixOps
+
+s toLowerCase
+
