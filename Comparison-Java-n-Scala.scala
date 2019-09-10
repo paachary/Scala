@@ -24,6 +24,7 @@ newgreetStrings.foreach(println)
 
 
 // Java program to declare a class with two variables with a constructor to initialize the variables:
+// Java classes have constructors and they take in the parameters via the constructors.
 
 class JavaClass {
 
@@ -52,9 +53,13 @@ class MainJavaClass {
 ~ 
 
 // Scala program to declare a class with two variables with a constructor to initialize the variables:
+// Scala classes can be defined directly with the parameters, there is no explicit need to define constructors as 
+// the compiler will create constructor based on the class definition.
+// Any code placed within the class will be compiled into the class's constructor.
 
 class ScalaClass (index :Int, name: String) {
-    def printString() = println("index = "+ index +": name = "+ name)
+    println("in the constructor of the scala class")
+    def printString() = println(s"index ${index} : name = ${name}")
 }
 
 object MainScalaClass {
