@@ -39,7 +39,6 @@ class Rational(n : Int, d:Int)   {// n & d -> class parameters
     
     def max( that : Rational) = if ( this.lessThan(that)) that else this 
     
-    def gcd( num1 : Int, num2 : Int) : Int = if ( num2 == 0 ) num1 else gcd ( num2, num1 % num2)
-    
+    def gcd( num1 : Int, num2 : Int) : Int = if ( num2 == 0 ) num1 else gcd ( num2, num1 % num2)    
     
 }
