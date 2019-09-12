@@ -109,3 +109,9 @@ import scala.language.postfixOps
 
 s toLowerCase
 
+
+def getFiles = (new File(System.getProperty("user.dir"))).listFiles
+
+for (line <- getFiles) println(line.getName.endsWith(".scala"))
+
+for (line <- getFiles; if line.getName.endsWith("scala")) println(line)
