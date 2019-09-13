@@ -119,3 +119,23 @@ for (line <- getFiles; if line.getName.endsWith("scala")) println(line)
 
 for (line <- Utilities.grepWithYield(".*gcd.*")) println(line)
 
+
+//////
+
+import java.lang.ArrayIndexOutOfBoundsException
+import java.lang.Exception
+
+val inputStr = Array("Prashant","-something.scala","somethingelse.scala")
+val searchString = new SearchString(inputStr, "-",".scala")
+
+try {
+    println(inputStr(searchString.searchFrom(0)))
+} catch {
+    case ex : ArrayIndexOutOfBoundsException => println("Pattern not found in the input string")
+    case ex : Exception => ex.printStackTrace
+}
+
+
+
+
+
