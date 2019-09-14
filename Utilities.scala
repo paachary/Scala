@@ -38,22 +38,28 @@ object Utilities extends App{
     }
       
     def cat = {
-        val width = args(0).toInt
+        
+        val width = args(0).toInt        
+
+        def processFile( fileName: String) = {
+            
+            def processLine( fileName:String, line:String) = 
+                if (line.length > width) println(s"${fileName} : ${line}")    
+            
+            for (line <- Source.fromFile(fileName).getLines())
+                processLine(fileName = fileName, line = line)
+        }
         
         for (file <- args.drop(1))
-            processFile(fileName = file, width = width)
+            processFile(fileName = file)
     }
 
-    private def processFile( fileName: String, width: Int) = {
-        
-        for (line <- Source.fromFile(fileName).getLines()){
-            processLine(fileName = fileName, line = line, width = width)
-        }  
-    }    
-    
-    private def processLine( fileName:String, line:String, width:Int) = 
-       if (line.length > width) println(s"${fileName} : ${line}")    
-    
-    cat
+    try {
+        require(!args.isEmpty)
+        cat
+    } catch {
+        case ex: java.lang.IllegalArgumentException => println("Usage>> scala Utilities <width_in_integer> <comma separated list of files>")
+        case ex: java.lang.Exception => println("Please check the usage")
+    }       
     
 }
