@@ -216,3 +216,24 @@ for (line <- Utilities.fileContainsMatcher("Class")) println(line)
 
 for (line <- Utilities.fileContaining("Class")) println(line)
 
+
+//Curried Functions
+
+//---------
+def curriedSum(x : Int)(y: Int) = x+y
+curriedSum: (x: Int)(y: Int)Int
+
+curriedSum(2)(4)
+res0: Int = 6
+
+//---------
+def firstFun(x:Int) = (y: Int) => x+y
+firstFun: (x: Int)Int => Int
+
+val secondOne = firstFun(3)
+secondOne: Int => Int = $$Lambda$799/1597425891@4da39ca9
+
+secondOne(4)
+res1: Int = 7
+//---------
+
