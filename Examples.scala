@@ -184,3 +184,35 @@ def multiTable() = {
         yield makeRow(row)    
     tableSeq.mkString("\n")
 }
+
+Utilities.echo("hello","world","one")
+
+Utilities.echo()
+
+val arr = Array("that's","up","doc")
+//-----------------------
+Utilities.echo(arr:_*)
+                      ^
+       warning: Passing an explicit array value to a Scala varargs method is deprecated (since 2.13.0) and will result in a defensive copy; Use the more efficient non-copying ArraySeq.unsafeWrapArray or an explicit toIndexedSeq call
+that's
+up
+doc
+//-----------------------
+
+val arr =scala.collection.immutable.IndexedSeq("that's","up","doc")
+
+Utilities.echo(arr:_*)
+that's
+up
+doc
+
+//-----------------------
+
+for (line <- Utilities.fileEndsWithOld("class")) println(line)
+
+for (line <- Utilities.fileEndsWithMatcher("class")) println(line)
+
+for (line <- Utilities.fileContainsMatcher("Class")) println(line)
+
+for (line <- Utilities.fileContaining("Class")) println(line)
+

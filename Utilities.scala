@@ -5,10 +5,9 @@ import java.lang.NullPointerException
 
 object Utilities extends App{
        
-    def filePattern (file: File) = fromFile(file).getLines().toList
+    private def filePattern (file: File) = fromFile(file).getLines().toList
     
-    def getFiles(path: String = System.getProperty("user.dir")) = (new File(path)).listFiles
-     
+    private def getFiles(path: String = System.getProperty("user.dir")) = (new File(path)).listFiles     
     
     def grepOld(pattern : String) = 
         for ( file <- getFiles()
@@ -36,7 +35,55 @@ object Utilities extends App{
     } yield { 
         s"${file} : ${trimmedLine}"
     }
-      
+    
+    def echo(args: String*) = {
+        //for (arg <- args) println(arg)
+        args.foreach(println)
+    }
+    
+    // Old way of writing:
+    def fileEndsWithOld(query: String) = 
+        for (file <- getFiles(); if file.getName.endsWith(query))
+    yield file
+
+    // Old way of writing:
+    def fileRegexOld(query: String) = 
+        for (file <- getFiles(); if file.getName.matches(query))
+    yield file
+
+    // Old way of writing:
+    def fileContainsOld(query: String) = 
+        for (file <- getFiles(); if file.getName.contains(query))
+    yield file
+    
+    // a slightly better way to write the above repeating apis
+    
+    private def fileMatching(query : String, matcher: (String, String) => Boolean) = 
+        for (file <- getFiles(); if matcher(file.getName, query)) yield file
+
+    def fileEndsWithMatcher(query: String) = 
+        fileMatching(query, _.endsWith(_))
+
+    def fileContainsMatcher(query: String) = 
+        fileMatching(query, _.contains(_))
+
+    def fileRegexMatcher(query: String) = 
+        fileMatching(query, _.matches(_))
+
+    // the most better way to write the above repeating apis
+    
+    private def fileMatching(matcher: String => Boolean) = 
+        for (file <- getFiles(); if matcher(file.getName)) yield file
+    
+    def fileEndingWith(query: String) = 
+        fileMatching(_.endsWith(query))
+
+    def fileContaining(query: String) = 
+        fileMatching(_.contains(query))
+
+    def fileRegex(query: String) = 
+        fileMatching(_.matches(query))    
+    
     def cat = {
         
         val width = args(0).toInt        
@@ -47,7 +94,7 @@ object Utilities extends App{
                 if (line.length > width) println(s"${fileName} : ${line}")    
             
             for (line <- Source.fromFile(fileName).getLines())
-                processLine(fileName = fileName, line = line)
+                processLine(fileName = fileName, line = line) // named arguments example
         }
         
         for (file <- args.drop(1))
