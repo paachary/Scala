@@ -237,3 +237,70 @@ secondOne(4)
 res1: Int = 7
 //---------
 
+// For instance, while both classes extend from Writer, and both can be used for writing plain text to files, 
+// FileWriter throws IOExceptions, whereas PrintWriter does not throw exceptions, and instead sets Boolean flags that can be checked.
+
+// PrintWriter
+import java.io.{File,PrintWriter,FileWriter}
+
+val pw = new PrintWriter(new File("hello.txt" ))
+try {
+    pw.write("Hello, world\n")
+    pw.println("writing new lines")
+} finally {
+    pw.close()
+}
+
+
+// loan pattern -> opens a resource and loans it to the caller program. Caller program doesnt need to bother with ensuring the resources being taken (read as closing)
+// care once job done.
+/*
+import java.io.{File,PrintWriter,FileWriter}
+
+
+def withPrintWriter(file: File, op: PrintWriter => Unit) = {
+    val pw = new PrintWriter(new FileWriter(file,true)) // for appending into an existing file if it exists already
+    
+    try {
+        op(pw)
+    }
+    finally {
+        pw.close()
+    }
+}
+*/
+
+// Using currying functions
+import java.io.{File,PrintWriter,FileWriter}
+
+def withPrintWriter(file: File) (op: PrintWriter => Unit) = {
+    val pw = new PrintWriter(new FileWriter(file,true)) // for appending into an existing file if it exists already
+    
+    try {
+        op(pw)
+    }
+    finally {
+        pw.close()
+    }
+}
+
+val arr = Array("writing this into a new file-2","trying out something-2", "let's c-2")
+
+/*
+withPrintWriter(new File("hello1.txt"),
+                pw => arr.foreach(pw.println)
+                )
+*/
+
+// Using currying functions
+val file = new File("hello1.txt")
+withPrintWriter(file) {writer => arr.foreach(writer.println)}
+
+// FileWriter
+val file = new File(canonicalFilename)
+val bw = new BufferedWriter(new FileWriter(file))
+bw.write(text)
+bw.close()
+
+
+
