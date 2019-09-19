@@ -1,4 +1,5 @@
-class Rational(n : Int, d:Int)   {// n & d -> class parameters     
+// Adding extending Ordered Trait for simplyfing comparisons
+class Rational(n : Int, d:Int)  extends Ordered[Rational] {// n & d -> class parameters     
     require( d != 0 ) // data quality pre-check ; denominator in a rational number must never be 0
     
     def this( n: Int) = this (n , 1)
@@ -40,7 +41,8 @@ class Rational(n : Int, d:Int)   {// n & d -> class parameters
     def max( that : Rational) = if ( this.lessThan(that)) that else this 
     
     def gcd( num1 : Int, num2 : Int) : Int = if ( num2 == 0 ) num1 else gcd ( num2, num1 % num2)
-    
+ 
+/*    
     // Implementing comparison operators without using Traits
     
     def < (that: Rational) = 
@@ -51,5 +53,9 @@ class Rational(n : Int, d:Int)   {// n & d -> class parameters
     def <= (that: Rational) = (this < that) || (this == that)
     
     def >= (that : Rational) = (that < this) || (this == that)
-
+*/
+    // Implementing the comparison operators using Ordered trait
+    // Need to implement the abstract method compare from the Ordered trait
+    
+    def compare(that: Rational) = (this.numer * that.denom ) - (that.numer * this.denom)
 }
