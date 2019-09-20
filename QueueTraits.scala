@@ -26,9 +26,3 @@ class BasicIntQueue extends IntQueue {
     def list  = buf.foreach(println)
 }
 
-val myqueue = new BasicIntQueue with Doubling // using the required trait directly when defining an instance of a class
-
-val newqueue = (new BasicIntQueue with Incrementing with Doubling with Filtering) // order of mixins follows a rule:
-                                    // traits further to the right take effect first
-
-val newqueue1 = (new BasicIntQueue with Doubling with Incrementing)

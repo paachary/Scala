@@ -302,5 +302,11 @@ val bw = new BufferedWriter(new FileWriter(file))
 bw.write(text)
 bw.close()
 
+val myqueue = new BasicIntQueue with Doubling // using the required trait directly when defining an instance of a class
+myqueue.list
+myqueue.put(2)
 
+val newqueue = (new BasicIntQueue with Incrementing with Doubling with Filtering) // order of mixins follows a rule:
+                                    // traits further to the right take effect first
 
+val newqueue1 = (new BasicIntQueue with Doubling with Incrementing)
