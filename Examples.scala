@@ -310,3 +310,20 @@ val newqueue = (new BasicIntQueue with Incrementing with Doubling with Filtering
                                     // traits further to the right take effect first
 
 val newqueue1 = (new BasicIntQueue with Doubling with Incrementing)
+newqueue1.list
+newqueue1.put(-2)
+newqueue1.put(2)
+newqueue1.put(4)
+newqueue1.put(10)
+
+newqueue1.list
+
+val newqueue2 = (new BasicIntQueue with Filtering with Doubling with Incrementing)
+newqueue2.list
+newqueue2.put(-2)
+newqueue2.put(2)
+newqueue2.put(4)
+newqueue2.put(10)
+
+newqueue2.list
+
