@@ -327,3 +327,4 @@ newqueue2.put(10)
 
 newqueue2.list
 
+val testPackage = new TestPackage
