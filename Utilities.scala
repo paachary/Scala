@@ -40,6 +40,21 @@ object Utilities extends App{
         //for (arg <- args) println(arg)
         args.foreach(println)
     }
+
+    def extractListLastElement(list: List[Any]) : Any = 
+        list match {
+            case h::Nil => h
+            case _::t => extractListLastElement(t)
+            case _ =>
+        }
+
+    def extractListElements(list: List[Any]) : Unit =
+        list match {
+            case h :: t => {println(h)
+                            extractListElements(t)
+            }
+            case _ =>
+        }
     
     // Old way of writing:
     def fileEndsWithOld(query: String) = 
