@@ -105,7 +105,7 @@ object Utilities extends App{
         require(!args.isEmpty)
         cat
     } catch {
-        case ex: java.lang.IllegalArgumentException => println("Usage>> scala Utilities <width_in_integer> <comma separated list of files>")
+        case ex: java.lang.IllegalArgumentException => println("Usage>> scala Utilities <width_in_integer> <space separated list of files>")
         case ex: java.lang.Exception => println("Please check the usage")
     }       
     
