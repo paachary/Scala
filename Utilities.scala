@@ -55,8 +55,32 @@ object Utilities extends App{
             }
             case _ =>
         }
+
+    def isort(xs: List[Int]) : List[Int]=
+        xs match {
+            case List() => List()
+            case x::xs1 => insert(x, isort(xs1))
+        }
+     
+    def insert(x: Int, xs: List[Int]) : List[Int] = 
+         xs match {
+             case List() => List(x)
+             case y :: ys => if (x <= y) x::xs else y :: insert(x, ys)
+         }
+
+    def appendList(list1: List[Any], list2: List[Any]) : List[Any] = 
+       list1 match {
+           case List() =>  list2
+           case head :: tl => head :: appendList(tl, list2)
+       }
     
-    // Old way of writing:
+    def appendReverseList(list1: List[Any], list2: List[Any]) : List[Any] = {
+       val list1_rev = list1.reverse
+       val list2_rev = list2.reverse
+       appendList(list1_rev, list2 = list2_rev)
+    }
+
+     // Old way of writing:
     def fileEndsWithOld(query: String) = 
         for (file <- getFiles(); if file.getName.endsWith(query))
     yield file
