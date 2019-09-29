@@ -122,6 +122,62 @@ object Utilities extends App{
 
     def fileRegex(query: String) = 
         fileMatching(_.matches(query))    
+
+
+
+    def msort[B](less: (B, B) => Boolean)
+        (xs: List[B]): List[B] = {
+  
+      def merge(xs: List[B], ys: List[B]): List[B] =
+        (xs, ys) match {
+          case (Nil, _) => ys
+          case (_, Nil) => xs
+          case (x :: xs1, y :: ys1) =>
+            if (less(x, y)) x :: merge(xs1, ys)
+            else y :: merge(xs, ys1)
+        }
+  
+      val n = xs.length / 2
+      if (n == 0) xs
+      else {
+        val (ys, zs) = xs splitAt n
+        merge(msort(less)(ys), msort(less)(zs))
+      }
+    }
+
+    def convertToUpper(string: String) : String = {
+        var convertedString: String = ""
+        for ( i <- 0 to string.length-1) {
+      
+          //97 and 122
+      
+          if ( string(i).toInt >= 97 && string(i).toInt <= 122) {
+            convertedString = convertedString+""+(string(i).toInt-32).toChar
+          } else {
+            convertedString = convertedString + "" + string(i)
+          }
+        }
+        convertedString
+      }
+      
+    def convertToLower(string: String) : String = {
+        var convertedString: String = ""
+        for ( i <- 0 to string.length-1) {
+      
+          //65 and 90
+      
+          if ( string(i).toInt >= 65 && string(i).toInt <= 90) {
+            convertedString = convertedString+""+(string(i).toInt+32).toChar
+          } else {
+            convertedString = convertedString + "" + string(i)
+          }
+        } 
+        convertedString
+    } 
+
+    def transformCase( string : String, f : String => String ) : String = {
+        f(string)
+    } 
     
     def cat = {
         
