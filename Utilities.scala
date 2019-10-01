@@ -178,7 +178,35 @@ object Utilities extends App{
     def transformCase( string : String, f : String => String ) : String = {
         f(string)
     } 
+
+    def wordCount(string: String) = {
+        import scala.collection.mutable.Map
+        val wordsCount = Map.empty[String, Int]
+        for (rawWord <-string.split("[ ,.!]+")) {
+            val word = rawWord.toLowerCase
+            val count = 
+            if (wordsCount.contains(word)) wordsCount(word)
+            else 0
+
+            wordsCount += (word -> (count+1))
+        }
+        wordsCount
+    }
+
+    def longestWord(input: Array[String]) = {
+        var word = input(0)
+        var idx = 0
+
+        for (i <- 1 until input.length) {
+            if (input(i).length > word.length) {
+                word = input(i)
+                idx = i
+            }
+        }
+        (word,idx)
+    }
     
+
     def cat = {
         
         val width = args(0).toInt        
