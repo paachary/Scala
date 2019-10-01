@@ -25,3 +25,21 @@ object ChecksumAccumulator {
 
 	}
 }
+
+import ChecksumAccumulator.calculate
+
+object Summer {
+
+    def main(args: Array[String]) = {
+        for (arg <- args)
+            println(arg + ": " + calculate(arg))
+    }
+}
+
+import ChecksumAccumulator.calculate
+
+object FallWinterSpringSummer extends App {
+
+  for ( list <- args ) 
+    println(list + ":" + calculate(list))
+}
