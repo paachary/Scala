@@ -17,9 +17,7 @@ class Time {
     def minute : Int = m
     def minute_=  
         (x: Int) = { m = x }
-    
 }
-
 
 class Thermometer {
     var celsius: Float = _
