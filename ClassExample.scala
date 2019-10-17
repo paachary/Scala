@@ -17,6 +17,8 @@ class Time {
     def minute : Int = m
     def minute_=  
         (x: Int) = { m = x }
+
+    override def toString(): String = s"${hour} : ${minute}"
 }
 
 class Thermometer {
