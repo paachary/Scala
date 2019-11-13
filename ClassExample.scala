@@ -174,3 +174,22 @@ object India extends CurrencyZone {
     val Rupee = make(100)
     val CurrencyUnit: Rupee = Rupee
 }
+
+abstract class Person( firstName: String, lastName : String, dob: String) {
+
+    def calculateAge : Long
+
+    override def toString(): String = s"${firstName}:${lastName}:${dob}"
+}
+
+class Employee (firstName: String, lastName: String, dob: String) 
+        extends Person (firstName, lastName, dob) {
+    def calculateAge: Long = {
+        import java.time.format.DateTimeFormatter
+        import java.time.LocalDate
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        val local_dob = LocalDate.parse(dob, formatter)
+        val age  = (LocalDate.now.toEpochDay() - local_dob.toEpochDay()) / 365
+        age
+    }
+}

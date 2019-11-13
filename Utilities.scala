@@ -147,8 +147,6 @@ object Utilities extends App{
     def fileRegex(query: String) = 
         fileMatching(_.matches(query))    
 
-
-
     def msort[B](less: (B, B) => Boolean)
         (xs: List[B]): List[B] = {
   
@@ -254,6 +252,16 @@ object Utilities extends App{
     } catch {
         case ex: java.lang.IllegalArgumentException => println("Usage>> scala Utilities <width_in_integer> <space separated list of files>")
         case ex: java.lang.Exception => println("Please check the usage")
-    }       
-    
+    }
+
+    private def separateOddEven(list: List[Int]) : (List[Int], List[Int]) = {
+
+        val (odd, even) = list.partition(_%2!=0)
+
+        (odd, even)
+    }
+
+    def getOdd(list : List[Int]) : List[Int] = separateOddEven(list)._1
+
+    def getEven(list : List[Int]) : List[Int] = separateOddEven(list)._2
 }

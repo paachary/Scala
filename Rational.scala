@@ -1,7 +1,7 @@
 // Adding extending Ordered Trait for simplyfing comparisons
 class Rational(n : Int, d:Int)  extends Ordered[Rational] {// n & d -> class parameters     
     require( d != 0 ) // data quality pre-check ; denominator in a rational number must never be 0
-    
+
     def this( n: Int) = this (n , 1)
     
     private val gcdNum = gcd(n.abs, d.abs)
@@ -41,6 +41,7 @@ class Rational(n : Int, d:Int)  extends Ordered[Rational] {// n & d -> class par
     def max( that : Rational) = if ( this.lessThan(that)) that else this 
     
     def gcd( num1 : Int, num2 : Int) : Int = if ( num2 == 0 ) num1 else gcd ( num2, num1 % num2)
+
  
 /*    
     // Implementing comparison operators without using Traits
