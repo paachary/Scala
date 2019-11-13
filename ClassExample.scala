@@ -177,19 +177,34 @@ object India extends CurrencyZone {
 
 abstract class Person( firstName: String, lastName : String, dob: String) {
 
-    def calculateAge : Long
+    val g_dob = dob
 
-    override def toString(): String = s"${firstName}:${lastName}:${dob}"
+    override def toString(): String = s"${firstName}:${lastName}:${g_dob}"
 }
 
-class Employee (firstName: String, lastName: String, dob: String) 
-        extends Person (firstName, lastName, dob) {
-    def calculateAge: Long = {
+trait PersonTrait extends Person{
+    def calculateAge : Long = {
         import java.time.format.DateTimeFormatter
         import java.time.LocalDate
+
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-        val local_dob = LocalDate.parse(dob, formatter)
+        val local_dob = LocalDate.parse(g_dob, formatter)
         val age  = (LocalDate.now.toEpochDay() - local_dob.toEpochDay()) / 365
         age
     }
+}
+
+case class Employee (firstName: String, lastName: String, dob: String) 
+        extends Person (firstName, lastName, dob) with PersonTrait
+
+object Person {
+    def identifyEmployee ( emp: Employee) : String = emp match {
+
+        case Employee("Prashant", "Acharya" , _) => "This is me, myself, moi"
+        case Employee("Prashant",_,_) => "This is not probably me..."
+        case _ => "Are you sure, Etes-vous sure???"
+    }
+
+    def compareEmployees(emp1: Employee, emp2: Employee) : Boolean = 
+        if (emp1.equals(emp2)) true else false
 }

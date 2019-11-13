@@ -328,3 +328,10 @@ newqueue2.put(10)
 newqueue2.list
 
 val testPackage = new TestPackage
+
+import Person._
+Person.identifyEmployee(Employee("Prashant", "Acharya", "1974-06-23"))
+Person.identifyEmployee(Employee("Prashant", "Zumobeg", "1974-06-23"))
+Person.identifyEmployee(Employee("Prashantg", "Acharya", "1974-06-23"))
+Person.compareEmployees(Employee("Prashant", "Acharya", "1974-06-23"),Employee("Prashant", "Acharya", "1974-06-23") )
+Person.compareEmployees(Employee("Prashant", "Acharya", "1974-06-23"), Employee("Prashantg", "Acharya", "1974-06-23"))
